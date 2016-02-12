@@ -154,7 +154,7 @@ if(!isset($_SESSION['iduser'])){
 
   while($data = $request->fetch(PDO::FETCH_BOTH)){
     $idt = $data['id'];
-    $req = $connexion->prepare("SELECT * FROM `competences` WHERE ida=$iduser AND idt=$idt");
+    $req = $connexion->prepare("SELECT * FROM `competences` WHERE ida=:iduser AND idt=:idt");
     $req->bindParam(':iduser', $iduser, PDO::PARAM_INT);
     $req->bindParam(':idt', $idt, PDO::PARAM_INT);
     $req->execute();
@@ -282,7 +282,9 @@ if(!isset($_SESSION['iduser'])){
   var i = <?php echo $a; ?>;
   var traiteResultat = function(){
     var data = this.responseText;
-    console.log(data);
+    var url = this.responseURL;
+    console.log('Data : ',data);
+    console.log(url);
   }
 
   function ajouter(){
@@ -320,7 +322,7 @@ if(!isset($_SESSION['iduser'])){
     var nom = document.getElementsByClassName('name')[i].textContent;
     console.log("nom: "+nom);
     console.log("target: "+ev.target.value);
-    //request.onload = traiteResultat;
+    request.onload = traiteResultat;
     request.open('GET', 'requete-form/process.php?niveau='+ev.target.value+'&techno='+nom.trim());
     request.send();
   }

@@ -16,7 +16,7 @@ class CheckId
     public function checkId()
     {
         try {
-            $connexion = new PDO('mysql:host=localhost; dbname=simplonsite; charset=utf8', 'root', 'root');
+            $connexion = new PDO('mysql:host=localhost; dbname=simplonsite; charset=utf8', 'root', '');
         } catch (Exeption $e) {
             die ('Erreur : ' . $e->getMessage());
         }
